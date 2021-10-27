@@ -1,0 +1,2 @@
+C:\workC++\IT Assignment\Test2\Debug\Test2.exe
+C:\workC++\IT Assignment\Test2\Debug\Test2.pdb
