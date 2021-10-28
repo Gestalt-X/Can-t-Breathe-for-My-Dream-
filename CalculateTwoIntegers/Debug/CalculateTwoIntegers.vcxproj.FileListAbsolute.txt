@@ -1,2 +1,0 @@
-C:\workC++\CalculateTwoIntegers\Debug\CalculateTwoIntegers.exe
-C:\workC++\CalculateTwoIntegers\Debug\CalculateTwoIntegers.pdb
