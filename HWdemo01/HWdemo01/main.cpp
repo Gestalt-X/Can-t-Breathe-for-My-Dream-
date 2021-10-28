@@ -6,7 +6,7 @@
 //
 
 //main.cpp
-#include <gtest/gtest.h>
+#include <gtest.h>
 /*Google_Test Launcher*/
 
 int main(int argc, const char * argv[]) {

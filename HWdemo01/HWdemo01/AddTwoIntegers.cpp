@@ -7,52 +7,73 @@
 
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 
 using namespace std;
 class AddTwoIntegers{
 public:
     AddTwoIntegers(void);
-    AddTwoIntegers(int i1,int i2);
+    AddTwoIntegers(double i1,double i2);
     void output(void);
-    int aPlusB(void);
-    int aMinusB(void);
-    int aMultipliedByB(void);
+    double aPlusB(void);
+    double aMinusB(void);
+    double aMultipliedByB(void);
     double aDividedByB(void);
-    int aModB(void);
+    double aModB(void);
+    void toFile();
 private:
-    /*First Integer*/
-    int a;
-    /*Second Integer*/
-    int b;
+    /*Integers*/
+    double a,b;
+    void insertIntegers(double &d);
 };
+
+void AddTwoIntegers::insertIntegers(double &a){
+    try {
+        if( scanf("%lf",&a)==0)
+            throw -1; //抛出int类型异常
+        else
+            return;
+    }
+    catch(int i){
+        cout<<"无效输入,请重新输入\n";
+        rewind(stdin);
+        insertIntegers(a);
+    }
+}
 
 AddTwoIntegers::AddTwoIntegers(void){
     cout<<"输入两个整数："<<"\n";
-    cin >>a;
-    cout<<"已经输入整数a =  "<<a<<"\n";
-    cin >>b;
-    cout<<"已经输入整数b = "<<b<<"\n";
+    insertIntegers(a);
+    cout<<"输入成功，已经输入整数a = "<<(int)a<<"\n";
+    insertIntegers(b);
+    cout<<"输入成功，已经输入整数b = "<<(int)b<<"\n";
 }
 
-AddTwoIntegers::AddTwoIntegers(int a, int b){
+AddTwoIntegers::AddTwoIntegers(double a, double b){
     this->a = a;
     this->b = b;
 }
 
-int AddTwoIntegers::aPlusB(void){
+double AddTwoIntegers::aPlusB(void){
     return a+b;
 }
-int AddTwoIntegers::aMinusB(void){
+double AddTwoIntegers::aMinusB(void){
     return a-b;
 }
-int AddTwoIntegers::aMultipliedByB(void){
+double AddTwoIntegers::aMultipliedByB(void){
     return a*b;
 }
 double AddTwoIntegers::aDividedByB(void){
-    return (double)a/(double)b;
+    if( b == 0)
+        return NULL;
+    else
+        return a/b;
 }
-int AddTwoIntegers::aModB(void){
-    return a%b;
+double AddTwoIntegers::aModB(void){
+    if( b == 0)
+        return NULL;
+    else
+        return (int)a%(int)b;
 }
 void AddTwoIntegers::output(void){
     cout<<"Output\n"
@@ -61,5 +82,22 @@ void AddTwoIntegers::output(void){
         <<"a * b = "<<aMultipliedByB()<<"\n"
         <<"a / b = "<<fixed<<setprecision(2)<<aDividedByB()<<"\n"
         <<"a % b = "<<aModB()<<endl;
-    
+
+}
+void AddTwoIntegers::toFile(){
+    //2. 创建流
+    fstream output;
+    //3. 打开文件，将流与文件相关联，这里使用绝对路径
+    output.open("out.txt");
+    //4. 向文件写入数据
+
+    output<<"Output\n"
+        <<"a + b = "<<aPlusB()<<"\n"
+        <<"a - b = "<<aMinusB()<<"\n"
+        <<"a * b = "<<aMultipliedByB()<<"\n"
+        <<"a / b = "<<fixed<<setprecision(2)<<aDividedByB()<<"\n"
+        <<"a % b = "<<aModB()<<endl;
+    //5. 关闭流
+    output.close();
+
 }
